@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .switch-lang{
+            color: white;
+            width: 80px;
+            text-align: left;
+            cursor: pointer;
+            z-index: 50;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        .switch-lang:hover .lang-dropdown{
+            display: block;
+        }
+        .current-lang{
+            background: #34495E;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            padding: 8px;
+        }
+        .lang-flag{
+            width: 20px;
+            display: inline-block;
+        }
+        .lang-text{
+            display: inline-block;
+            margin-left: 5px;
+            vertical-align: top;
+            margin-top: 2px;
+        }
+        .lang-dropdown{
+            display: none;
+            background: #34495E;
+            border-radius: 5px;
+            margin-top: 2px;
+        }
+        .selecting-lang{
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            padding: 8px;
+        }
+        .selecting-lang:hover{
+            background: #22313F;
+        }
+    </style>
+</head>
+<body>
+    <div class="switch-lang">
+        <div class="current-lang">
+              <img src="https://cdn2.iconfinder.com/data/icons/world-flag-icons/128/Flag_of_United_Kingdom.png" class="lang-flag">
+              <span class="lang-text"> EN</span>
+        </div>
+        <div class="lang-dropdown">
+            <a href="" class="selecting-lang">
+                  <img src="https://cdn2.iconfinder.com/data/icons/world-flag-icons/128/Flag_of_United_Kingdom.png" class="lang-flag">
+                  <span class="lang-text"> EN</span>
+            </a>
+            <a href="" class="selecting-lang">
+                  <img src="https://cdn2.iconfinder.com/data/icons/world-flag-icons/128/Flag_of_France.png" class="lang-flag">
+                  <span class="lang-text"> FR</span>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
