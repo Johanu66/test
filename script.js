@@ -1,21 +1,18 @@
+// La chaîne de date en français
+let dateString = 'octobre 3, 2024';
 // Tableau pour traduire les mois français en anglais
 const moisFrancais = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
 const moisAnglais = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
-// Chaîne de date en français
-let dateString = 'octobre 3, 2024';
-
 // Remplacer le mois en français par le mois en anglais
 moisFrancais.forEach((mois, index) => {
     if (dateString.includes(mois)) {
         dateString = dateString.replace(mois, moisAnglais[index]);
     }
 });
-
 // Créer un objet Date à partir de la chaîne traduite
 let oldDate = new Date(dateString);
 
-// Fonction pour introduire un délai
+
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -27,9 +24,9 @@ async function sendMail(dataMail) {
 
         // Effectuer une requête POST vers l'API
         const response = await fetch('http://localhost/randever/sending-mail-api/script.php', {
-            method: 'POST',
+            method: 'POST', // Méthode HTTP POST
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
+                'Content-Type': 'application/x-www-form-urlencoded', // Indique que les données envoyées sont en JSON
             },
             body: params.toString()
         });
@@ -49,36 +46,36 @@ async function sendMail(dataMail) {
     }
 }
 
-// Fonction principale pour automatiser les étapes
-async function test() {
-    // Simuler un clic sur un élément pour activer un service
-    document.getElementById("RdvBranchService").click();
+var test = async function(){
+    var elem = document.getElementById("RdvBranchService");
+    elem.click()
 
-    await sleep(2000);
+    await sleep(2000)
 
-    // Sélectionner un pays dans une liste déroulante et déclencher un événement de changement
-    let selectElement = document.getElementById("formCountry");
+    var selectElement = document.getElementById("formCountry");
     selectElement.value = 1;
-    selectElement.dispatchEvent(new Event('change', { bubbles: true }));
+    var event = new Event('change', { bubbles: true });
+    selectElement.dispatchEvent(event);
 
-    await sleep(2000);
+    await sleep(2000)
 
-    // Cliquer sur un bouton pour activer le RDV
-    document.querySelector(".buttonActiveRdv").click();
+    var buttonActiveRdv = document.querySelector(".buttonActiveRdv");
+    buttonActiveRdv.click();
 
-    await sleep(2000);
+    await sleep(2000)
 
-    // Répéter la sélection du pays et l'activation du bouton
+    var selectElement = document.getElementById("formCountry");
     selectElement.value = 1;
-    selectElement.dispatchEvent(new Event('change', { bubbles: true }));
+    var event = new Event('change', { bubbles: true });
+    selectElement.dispatchEvent(event);
 
-    await sleep(2000);
+    await sleep(2000)
 
-    document.querySelector(".buttonActiveRdv").click();
+    var buttonActiveRdv = document.querySelector(".buttonActiveRdv");
+    buttonActiveRdv.click();
 
-    await sleep(10000);
+    await sleep(10000)
 
-    // Récupérer la date affichée, la traduire en anglais, et créer un objet Date
     dateString = document.querySelector(".date").innerHTML;
     moisFrancais.forEach((mois, index) => {
         if (dateString.includes(mois)) {
@@ -87,29 +84,30 @@ async function test() {
     });
     let dateMoreNear = new Date(dateString);
 
-    // Comparer les dates et envoyer un e-mail si une date plus récente est trouvée
-    if (dateMoreNear < oldDate) {
-        const dataMail = {
+    if(dateMoreNear<oldDate){
+        let dataMail = {
             name: "Nom",
             email: "ambassadebenin@gmail.com",
             subject: "Date récente trouvée",
             message: "Date récente trouvée : " + dateMoreNear
-        };
 
+        }
         console.log("Date récente trouvée : " + dateMoreNear);
-        await sendMail(dataMail);
+        sendMail(dataMail);
         oldDate = dateMoreNear;
-    } else {
+    }
+    else{
         console.log("Rien trouvé");
     }
 
-    await sleep(2000);
+    await sleep(2000)
 
-    // Revenir à la page précédente
-    document.querySelector(".back").click();
+    var back = document.querySelector(".back");
+    back.click();
+
+
 }
 
-// Fonction pour démarrer l'intervalle de répétition de la fonction test()
 function startInterval() {
     setInterval(async () => {
         try {
@@ -117,8 +115,7 @@ function startInterval() {
         } catch (error) {
             console.error('Erreur lors de l\'exécution de la fonction async :', error);
         }
-    }, 120000); // Intervalle de 2 minutes
+    }, 120000); // Intervalle de 2 secondes
 }
 
-// Démarrer le processus
 startInterval();
